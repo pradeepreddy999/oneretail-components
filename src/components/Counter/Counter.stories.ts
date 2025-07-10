@@ -22,6 +22,6 @@ type Story = StoryObj<typeof meta>;
 
 export const InitializeBy10: Story = {
   args: {
-    value: 7,
+    value: 10,
   },
 };
