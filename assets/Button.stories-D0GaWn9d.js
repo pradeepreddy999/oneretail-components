@@ -1,4 +1,4 @@
-import{B as s}from"./Button-p6y55GC_.js";import"./jsx-runtime-D_zvdyIk.js";import"./iframe-B3IKtWZP.js";const{fn:t}=__STORYBOOK_MODULE_TEST__,m={title:"Example/Button",component:s,parameters:{layout:"centered"},tags:["autodocs"],argTypes:{backgroundColor:{control:"color"}},args:{onClick:t()}},r={args:{primary:!0,label:"Button"}},a={args:{label:"Button"}},e={args:{size:"large",label:"Button"}},o={args:{size:"small",label:"Button"}};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`{
+import{B as s}from"./Button-BYzdFwix.js";import"./jsx-runtime-D_zvdyIk.js";import"./iframe-Dz8vk3DH.js";const{fn:t}=__STORYBOOK_MODULE_TEST__,m={title:"Example/Button",component:s,parameters:{layout:"centered"},tags:["autodocs"],argTypes:{backgroundColor:{control:"color"}},args:{onClick:t()}},r={args:{primary:!0,label:"Button"}},a={args:{label:"Button"}},e={args:{size:"large",label:"Button"}},o={args:{size:"small",label:"Button"}};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`{
   args: {
     primary: true,
     label: 'Button'
