@@ -5,7 +5,7 @@ import dts from "vite-plugin-dts";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [react(), dts(), tailwindcss()],
+  plugins: [react(), tailwindcss(), dts()],
   build: {
     lib: {
       entry: "src/index.ts",
@@ -21,5 +21,10 @@ export default defineConfig({
         },
       },
     },
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/setupTests.ts",
   },
 });
