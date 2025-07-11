@@ -1,7 +1,7 @@
 {
   "name": "@pradeepreddy999/oneretail",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/oneretail.umd.js",
   "module": "./dist/oneretail.es.js",
