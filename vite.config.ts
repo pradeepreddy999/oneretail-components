@@ -10,7 +10,7 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       outDir: "dist",
-      copyDtsFiles: true,
+      // copyDtsFiles: true,
     }),
     tailwindcss(),
   ],
