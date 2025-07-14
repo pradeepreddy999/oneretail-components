@@ -1,4 +1,4 @@
-import { KendoGrid } from "../../components";
+// import { KendoGrid } from "../../components";
 // import type { GridProps } from "./Grid.types";
 
 const Grid = () =>
@@ -19,12 +19,12 @@ const Grid = () =>
       <div className="p-4 bg-white">
         <div className="flex justify-between items-center"></div>
         <div className="border-2 border-gray-400 rounded-3xl">
-          <KendoGrid
+          {/* <KendoGrid
             data={[]}
             columns={[]}
             sort={[{ field: "", dir: "asc" }]}
             // rowSelectable={isGridRowSelectable}
-          />
+          /> */}
         </div>
       </div>
     );

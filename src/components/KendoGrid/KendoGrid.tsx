@@ -23,11 +23,15 @@ import {
   getAggrFooterVal,
   isColumnFiltered,
 } from "../../utils";
+import { ExcelExport } from "../ExcelExport";
 
 const KendoGrid = ({
+  title,
   data,
   columns,
   sort,
+  excelRef,
+  handleExportComplete,
   pageSize = 30,
   rowSelectable,
 }: KendoGridProps) => {
@@ -67,123 +71,136 @@ const KendoGrid = ({
   };
 
   return data.length > 0 ? (
-    <Grid
-      className="border-none"
-      style={{ height: "24rem" }}
-      data={orderBy(
-        filterBy(
-          data,
-          dataState.filter as CompositeFilterDescriptor | FilterDescriptor
-        ),
-        dataState.sort as SortDescriptor[]
-      ).slice(skip, skip + pageSize)}
-      selectable={{
-        enabled: true,
-        drag: false,
-        cell: false,
-        mode: "multiple",
-      }}
-      sortable={{
-        allowUnsort: true,
-        mode: "multiple",
-      }}
-      resizable
-      scrollable="virtual"
-      rowHeight={10}
-      skip={skip}
-      pageSize={pageSize}
-      total={
-        filterBy(
-          data,
-          dataState?.filter as CompositeFilterDescriptor | FilterDescriptor
-        ).length
-      }
-      {...dataState}
-      onDataStateChange={handleDataStateChange}
-      dataItemKey={DATA_ITEM_KEY}
-      selectedField={SELECTED_FIELD}
-      onSelectionChange={handleSelectionChange}
-    >
-      {rowSelectable && (
-        <GridColumn
-          field={SELECTED_FIELD}
-          width="42px"
-          headerSelectionValue={
-            data.findIndex((item) => !selectedState[idGetter(item)]) === -1
-          }
-          headerClassName="text-start"
-          className="text-start"
-          locked
-          editable={false}
-        />
-      )}
-      {columns.map((col, ind) => (
-        <GridColumn
-          key={col.field.split(" ").join("") + ind || ind}
-          field={col.field}
-          title={col.title}
-          width={col.width}
-          className={col.textClassName}
-          columnMenu={
-            col.columnMenuRequired
-              ? (p) => ColumnMenuCheckboxFilter(p, data, dataState)
-              : undefined
-          }
-          format={col.format.length > 0 ? `{0:${col.format}}` : col.format}
-          locked={col.locked}
-          headerClassName={
-            isColumnFiltered(col.field, dataState)
-              ? "text-center k-active-filter"
-              : "text-center"
-          }
-          footerCell={(fCell) => {
-            if (
-              typeof col.footerVal === "string" &&
-              col.footerVal.toLowerCase().includes("total")
-            ) {
-              return (
-                <td aria-colindex={fCell.ariaColumnIndex} className="text-left">
-                  {col.footerVal +
-                    ` (${intl.formatNumber(
-                      filterBy(
-                        data,
-                        dataState.filter as
-                          | CompositeFilterDescriptor
-                          | FilterDescriptor
-                      )?.length,
-                      "n0"
-                    )})`}
-                </td>
-              );
-            } else if (col.footerAggr && col.footerAggr.length > 0) {
-              const field = fCell.field as string;
-              const aggrVal = getAggrFooterVal(
-                data,
-                dataState,
-                field,
-                col.footerAggr
-              );
+    <>
+      <Grid
+        className="border-none"
+        style={{ height: "24rem" }}
+        data={orderBy(
+          filterBy(
+            data,
+            dataState.filter as CompositeFilterDescriptor | FilterDescriptor
+          ),
+          dataState.sort as SortDescriptor[]
+        ).slice(skip, skip + pageSize)}
+        selectable={{
+          enabled: true,
+          drag: false,
+          cell: false,
+          mode: "multiple",
+        }}
+        sortable={{
+          allowUnsort: true,
+          mode: "multiple",
+        }}
+        resizable
+        scrollable="virtual"
+        rowHeight={10}
+        skip={skip}
+        pageSize={pageSize}
+        total={
+          filterBy(
+            data,
+            dataState?.filter as CompositeFilterDescriptor | FilterDescriptor
+          ).length
+        }
+        {...dataState}
+        onDataStateChange={handleDataStateChange}
+        dataItemKey={DATA_ITEM_KEY}
+        selectedField={SELECTED_FIELD}
+        onSelectionChange={handleSelectionChange}
+      >
+        {rowSelectable && (
+          <GridColumn
+            field={SELECTED_FIELD}
+            width="42px"
+            headerSelectionValue={
+              data.findIndex((item) => !selectedState[idGetter(item)]) === -1
+            }
+            headerClassName="text-start"
+            className="text-start"
+            locked
+            editable={false}
+          />
+        )}
+        {columns.map((col, ind) => (
+          <GridColumn
+            key={col.field.split(" ").join("") + ind || ind}
+            field={col.field}
+            title={col.title}
+            width={col.width}
+            className={col.textClassName}
+            columnMenu={
+              col.columnMenuRequired
+                ? (p) => ColumnMenuCheckboxFilter(p, data, dataState)
+                : undefined
+            }
+            format={col.format.length > 0 ? `{0:${col.format}}` : col.format}
+            locked={col.locked}
+            headerClassName={
+              isColumnFiltered(col.field, dataState)
+                ? "text-center k-active-filter"
+                : "text-center"
+            }
+            footerCell={(fCell) => {
+              if (
+                typeof col.footerVal === "string" &&
+                col.footerVal.toLowerCase().includes("total")
+              ) {
+                return (
+                  <td
+                    aria-colindex={fCell.ariaColumnIndex}
+                    className="text-left"
+                  >
+                    {col.footerVal +
+                      ` (${intl.formatNumber(
+                        filterBy(
+                          data,
+                          dataState.filter as
+                            | CompositeFilterDescriptor
+                            | FilterDescriptor
+                        )?.length,
+                        "n0"
+                      )})`}
+                  </td>
+                );
+              } else if (col.footerAggr && col.footerAggr.length > 0) {
+                const field = fCell.field as string;
+                const aggrVal = getAggrFooterVal(
+                  data,
+                  dataState,
+                  field,
+                  col.footerAggr
+                );
 
+                return (
+                  <td
+                    aria-colindex={fCell.ariaColumnIndex}
+                    className="text-right"
+                  >
+                    {intl.formatNumber(aggrVal, col.format)}
+                  </td>
+                );
+              }
               return (
                 <td
                   aria-colindex={fCell.ariaColumnIndex}
                   className="text-right"
-                >
-                  {intl.formatNumber(aggrVal, col.format)}
-                </td>
+                ></td>
               );
-            }
-            return (
-              <td
-                aria-colindex={fCell.ariaColumnIndex}
-                className="text-right"
-              ></td>
-            );
-          }}
-          editable={false}
-        />
-      ))}
-    </Grid>
+            }}
+            editable={false}
+          />
+        ))}
+      </Grid>
+      <ExcelExport
+        data={data}
+        dataState={dataState}
+        columns={columns}
+        ref={excelRef}
+        fileName={title}
+        handleExportComplete={handleExportComplete}
+      />
+    </>
   ) : (
     <Grid data={[]}>
       <GridNoRecords>No Records found</GridNoRecords>
