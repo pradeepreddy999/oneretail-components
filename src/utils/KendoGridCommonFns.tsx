@@ -14,7 +14,7 @@ export const ColumnMenuCheckboxFilter = (
 ) => {
   let finalData = [];
   const field = defaultProps?.column?.field;
-  if (!field) return null;
+  if (!field) return undefined;
 
   const filter = dataState.filter;
 
