@@ -1,4 +1,5 @@
 import {
+  filterBy,
   type CompositeFilterDescriptor,
   type FilterDescriptor,
   type State,
@@ -90,6 +91,25 @@ export const GridColumnMenuAnchorRemoval = () => {
     ".k-grid-header-menu,.k-grid-column-menu"
   );
   columnMenuAnchors.forEach((el) => el.removeAttribute("href"));
+};
+
+export const getAggrFooterVal = (
+  data: [],
+  dataState: State,
+  field: string,
+  aggr: string
+): number => {
+  let val = 0;
+  if (aggr === "sum") {
+    val = filterBy(
+      data,
+      dataState.filter as CompositeFilterDescriptor | FilterDescriptor
+    ).reduce((acc, curr) => {
+      acc = acc + curr[field];
+      return acc;
+    }, 0);
+  }
+  return val;
 };
 
 // debounce and throttle functions are used for performance optimization (limit the number of times a function is called).

@@ -18,7 +18,11 @@ import {
   type SortDescriptor,
   type State,
 } from "@progress/kendo-data-query";
-import { ColumnMenuCheckboxFilter, isColumnFiltered } from "../../utils";
+import {
+  ColumnMenuCheckboxFilter,
+  getAggrFooterVal,
+  isColumnFiltered,
+} from "../../utils";
 
 const KendoGrid = ({
   data,
@@ -60,20 +64,6 @@ const KendoGrid = ({
 
       setSelectedState(newSelectedState);
     }
-  };
-
-  const getAggrFooterVal = (field: string, aggr: string): number => {
-    let val = 0;
-    if (aggr === "sum") {
-      val = filterBy(
-        data,
-        dataState.filter as CompositeFilterDescriptor | FilterDescriptor
-      ).reduce((acc, curr) => {
-        acc = acc + curr[field];
-        return acc;
-      }, 0);
-    }
-    return val;
   };
 
   return data.length > 0 ? (
@@ -167,7 +157,12 @@ const KendoGrid = ({
               );
             } else if (col.footerAggr && col.footerAggr.length > 0) {
               const field = fCell.field as string;
-              const aggrVal = getAggrFooterVal(field, col.footerAggr);
+              const aggrVal = getAggrFooterVal(
+                data,
+                dataState,
+                field,
+                col.footerAggr
+              );
 
               return (
                 <td
@@ -190,7 +185,9 @@ const KendoGrid = ({
       ))}
     </Grid>
   ) : (
-    <GridNoRecords>No Records found</GridNoRecords>
+    <Grid data={[]}>
+      <GridNoRecords>No Records found</GridNoRecords>
+    </Grid>
   );
 };
 

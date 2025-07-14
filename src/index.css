@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: light dark;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-@media (prefers-color-scheme: light) {
+@theme {
+  --table-cell-border-color: #ced4da;
+  --table-alternate-col-color: #f1f3f5;
+  --text-color: #212529;
+  --screen-primary-color: #4263eb;
+  --screen-primary-color-rgba-01: rgba(66, 99, 235, 0.1);
+  --screen-primary-color-rgba-03: rgba(66, 99, 235, 0.3);
+  --screen-secondary-color: #1f1755;
+  --screen-secondary-color-rgba-05: rgba(31, 23, 85, 0.5);
+  --screen-secondary-color-rgba-08: rgba(31, 23, 85, 0.8);
 }

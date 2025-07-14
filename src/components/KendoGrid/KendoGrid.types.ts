@@ -2,7 +2,6 @@ import type { SortDescriptor } from "@progress/kendo-data-query";
 
 export type KendoGridProps = {
   data: [];
-  pageSize: number;
   columns: {
     field: string;
     title: string;
@@ -15,5 +14,6 @@ export type KendoGridProps = {
     footerAggr?: string;
   }[];
   sort: [{ field: string; dir: "asc" | "desc" }] | SortDescriptor[];
+  pageSize?: number;
   rowSelectable?: boolean;
 };

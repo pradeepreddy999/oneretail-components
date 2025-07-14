@@ -45,7 +45,7 @@ th.k-filterable.k-table-th.k-header {
 }
 
 .k-grid .k-grid-footer .k-grid-footer-sticky {
-  background-color: var(--white-color);
+  background-color: var(--color-white);
 }
 
 .k-grid-header .k-table-th.k-grid-header-sticky {
@@ -66,7 +66,7 @@ th.k-filterable.k-table-th.k-header {
 .k-grid-header .k-table-td.k-grid-header-sticky,
 .k-grid-header .k-grid-header-sticky.k-sorted,
 .k-grid-content .k-table-tbody tr.k-table-row > td.k-grid-content-sticky {
-  background-color: var(--white-color);
+  background-color: var(--color-white);
 }
 
 .k-grid tr.k-state-selected > td,
@@ -78,9 +78,58 @@ th.k-filterable.k-table-th.k-header {
   height: 0.6em;
   line-height: 0.68;
   font-weight: bold !important;
-  background-color: var(--white-color) !important;
+  background-color: var(--color-white) !important;
 }
 
 .k-grid input.k-checkbox {
   box-shadow: none;
+}
+
+.k-grid :is(.k-table-thead, .k-table, .k-table-tfoot td) {
+  color: var(--text-color);
+}
+
+.k-grid input[type="checkbox"] {
+  accent-color: var(--screen-primary-color);
+  border: 1px solid var(--screen-primary-color);
+  background-color: var(--screen-primary-color-rgba-01);
+}
+
+.k-grid input.k-checkbox:checked {
+  background-color: var(--screen-primary-color);
+}
+
+.no-records-grid.k-grid .k-grid-table-wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* background color for kendo grid alternate rows */
+
+.k-grid tr,
+.k-grid tr .k-grid-content-sticky,
+.k-header.k-grid-header-sticky {
+  background-color: var(--color-white) !important;
+}
+
+.k-grid-header {
+  background-color: var(--color-gray-200) !important;
+  background-clip: content-box;
+}
+
+.k-grid-footer {
+  background-color: var(--color-gray-200) !important;
+  background-clip: content-box;
+}
+
+/* grid active filter styling */
+.k-grid .k-active-filter .k-grid-header-menu.k-grid-column-menu {
+  color: var(--color-white) !important;
+  background-color: rgb(170, 169, 169) !important;
+}
+
+.k-grid-header .k-sort-icon {
+  color: var(--screen-primary-color);
 }
