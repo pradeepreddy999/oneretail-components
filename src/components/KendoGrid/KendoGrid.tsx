@@ -10,6 +10,7 @@ import {
 import type { KendoGridProps } from "./KendoGrid.types";
 
 const KendoGrid = ({ ref, data, columns, pageSize }: KendoGridProps) => {
+  // const intl = useInternationalization();
   const [dataState, setDataStateChange] = useState({});
 
   const DATA_ITEM_KEY = "KeyCol";
@@ -28,7 +29,7 @@ const KendoGrid = ({ ref, data, columns, pageSize }: KendoGridProps) => {
     <Grid
       ref={ref}
       sortable
-      resizable={false}
+      resizable
       style={{ height: "325px" }}
       rowHeight={30}
       selectable={{
