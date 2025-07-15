@@ -6,20 +6,22 @@ import type { ExportCompleteProps } from "../../utils/common.types";
 export type KendoGridProps = {
   title: string;
   data: [];
-  columns: {
-    field: string;
-    title: string;
-    width: string;
-    textClassName: string;
-    columnMenuRequired: boolean;
-    format: string;
-    locked: boolean;
-    footerVal?: string;
-    footerAggr?: string;
-  }[];
+  columns: KendoGridColumnProps[];
   sort: [{ field: string; dir: "asc" | "desc" }] | SortDescriptor[];
   excelRef: Ref<ExcelExport> | undefined;
   handleExportComplete: ExportCompleteProps;
   pageSize?: number;
   rowSelectable?: boolean;
+};
+
+export type KendoGridColumnProps = {
+  field: string;
+  title: string;
+  width: string;
+  textClassName?: string;
+  columnMenuRequired?: boolean;
+  format?: string;
+  locked?: boolean;
+  footerVal?: string;
+  footerAggr?: string;
 };

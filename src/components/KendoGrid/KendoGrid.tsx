@@ -134,7 +134,11 @@ const KendoGrid = ({
                 ? (p) => ColumnMenuCheckboxFilter(p, data, dataState)
                 : undefined
             }
-            format={col.format.length > 0 ? `{0:${col.format}}` : col.format}
+            format={
+              col.format && col.format.length > 0
+                ? `{0:${col.format}}`
+                : col.format
+            }
             locked={col.locked}
             headerClassName={
               isColumnFiltered(col.field, dataState)
@@ -177,7 +181,7 @@ const KendoGrid = ({
                     aria-colindex={fCell.ariaColumnIndex}
                     className="text-right"
                   >
-                    {intl.formatNumber(aggrVal, col.format)}
+                    {intl.formatNumber(aggrVal, col.format || "")}
                   </td>
                 );
               }
