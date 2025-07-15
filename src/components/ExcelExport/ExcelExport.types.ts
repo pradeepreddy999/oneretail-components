@@ -1,7 +1,7 @@
 import type { Ref } from "react";
 import type { State } from "@progress/kendo-data-query";
 import type { ExcelExport } from "@progress/kendo-react-excel-export";
-import type { handleExportComplete } from "../../utils/common.types";
+import type { ExportCompleteProps } from "../../utils/common.types";
 
 export type ExcelExportProps = {
   ref: Ref<ExcelExport> | undefined;
@@ -9,5 +9,5 @@ export type ExcelExportProps = {
   columns: { [key: string]: unknown }[];
   dataState: State;
   fileName: string;
-  handleExportComplete: handleExportComplete;
+  handleExportComplete: ExportCompleteProps;
 };

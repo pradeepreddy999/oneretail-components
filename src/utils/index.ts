@@ -1,3 +1,3 @@
 export * from "./utilities";
 export * from "./KendoGridCommonFns";
-export type { handleExportComplete } from "./common.types";
+export type { ExportCompleteProps } from "./common.types";

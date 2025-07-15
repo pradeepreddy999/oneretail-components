@@ -1,7 +1,7 @@
 import type { SortDescriptor } from "@progress/kendo-data-query";
 import type { ExcelExport } from "@progress/kendo-react-excel-export";
 import type { Ref } from "react";
-import type { handleExportComplete } from "../../utils/common.types";
+import type { ExportCompleteProps } from "../../utils/common.types";
 
 export type KendoGridProps = {
   title: string;
@@ -19,7 +19,7 @@ export type KendoGridProps = {
   }[];
   sort: [{ field: string; dir: "asc" | "desc" }] | SortDescriptor[];
   excelRef: Ref<ExcelExport> | undefined;
-  handleExportComplete: handleExportComplete;
+  handleExportComplete: ExportCompleteProps;
   pageSize?: number;
   rowSelectable?: boolean;
 };
