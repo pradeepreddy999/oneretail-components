@@ -1,5 +1,8 @@
 import type { Preview } from "@storybook/react-vite";
 import "../src/index.css";
+import "@progress/kendo-theme-default/dist/all.css";
+// import "../src/KendoStyles.css";
+import "hammerjs";
 
 const preview: Preview = {
   parameters: {
