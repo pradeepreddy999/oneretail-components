@@ -24,6 +24,7 @@ import {
   isColumnFiltered,
 } from "../../utils";
 import { ExcelExport } from "../ExcelExport";
+import "./KendoGrid.css";
 
 const KendoGrid = ({
   title,
