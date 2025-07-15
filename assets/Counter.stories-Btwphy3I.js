@@ -1,5 +1,0 @@
-import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{r as u}from"./iframe-CB2zhL69.js";const r=({value:a=0})=>{const[o,n]=u.useState(a),c=()=>{n(s=>s+1)},l=()=>{n(s=>s-1)};return e.jsxs("div",{className:"mx-auto rounded-xl bg-white p-6 shadow-lg outline outline-black/5",children:[e.jsxs("div",{children:["Count: ",o]}),e.jsxs("div",{className:"flex items-center gap-x-2",children:[e.jsx("button",{onClick:c,children:"Increment"}),e.jsx("button",{onClick:l,children:"Decrement"})]})]})};r.__docgenInfo={description:"",methods:[],displayName:"Counter",props:{value:{required:!1,tsType:{name:"number"},description:"",defaultValue:{value:"0",computed:!1}}}};const m={title:"Examples/Counter",component:r,tags:["autodocs"],parameters:{layout:"fullscreen"},args:{value:0},argTypes:{value:{control:"number"}}},t={args:{value:10}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
-  args: {
-    value: 10
-  }
-}`,...t.parameters?.docs?.source}}};const p=["InitializeBy10"];export{t as InitializeBy10,p as __namedExportsOrder,m as default};
