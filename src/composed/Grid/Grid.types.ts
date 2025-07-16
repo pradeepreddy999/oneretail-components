@@ -12,4 +12,4 @@ export type GridProps = {
   sortOptions?: string[];
   sort: SortDescriptor[];
   isGridRowSelectable?: boolean;
-} & Omit<KendoGridProps, "excelRef" | "handleExportComplete">;
+} & Omit<KendoGridProps, "excelRef" | "handleExportComplete" | "rowSelectable">;

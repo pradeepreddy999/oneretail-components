@@ -1,13 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Grid,
   GridColumn,
   GridNoRecords,
   type GridDataStateChangeEvent,
-  getSelectedState,
   type GridSelectionChangeEvent,
+  type GridHeaderSelectionChangeEvent,
 } from "@progress/kendo-react-grid";
-import { getter } from "@progress/kendo-react-common";
 import { useInternationalization } from "@progress/kendo-react-intl";
 import type { KendoGridProps } from "./KendoGrid.types";
 import {
@@ -18,6 +17,7 @@ import {
   type SortDescriptor,
   type State,
 } from "@progress/kendo-data-query";
+import type { SelectDescriptor } from "@progress/kendo-react-data-tools";
 import {
   ColumnMenuCheckboxFilter,
   getAggrFooterVal,
@@ -36,18 +36,13 @@ const KendoGrid = ({
   pageSize = 30,
   rowSelectable,
 }: KendoGridProps) => {
+  const DATA_ITEM_KEY = "id";
   const intl = useInternationalization();
   const [dataState, setDataState] = useState<State>({
     sort: sort,
   });
   const [skip, setSkip] = useState(0);
-  const [selectedState, setSelectedState] = useState<{
-    [key: string]: unknown;
-  }>({});
-
-  const DATA_ITEM_KEY = "KeyCol";
-  const SELECTED_FIELD = "selected";
-  const idGetter = getter(DATA_ITEM_KEY);
+  const [select, setSelect] = useState<SelectDescriptor>({});
 
   const handleDataStateChange = (event: GridDataStateChangeEvent) => {
     if (
@@ -59,17 +54,20 @@ const KendoGrid = ({
     setDataState(event.dataState);
   };
 
-  const handleSelectionChange = (event: GridSelectionChangeEvent) => {
-    if (event.syntheticEvent) {
-      const newSelectedState = getSelectedState({
-        event,
-        selectedState: selectedState as { [id: string]: boolean | number[] },
-        dataItemKey: DATA_ITEM_KEY,
-      });
+  const onHeaderSelectionChange = React.useCallback(
+    (event: GridHeaderSelectionChangeEvent) => {
+      setSelect(event.select);
+    },
+    []
+  );
 
-      setSelectedState(newSelectedState);
-    }
-  };
+  const onSelectionChange = React.useCallback(
+    (event: GridSelectionChangeEvent) => {
+      console.log(event.select);
+      setSelect(event.select);
+    },
+    []
+  );
 
   return data.length > 0 ? (
     <>
@@ -107,21 +105,12 @@ const KendoGrid = ({
           cell: false,
           mode: "multiple",
         }}
-        selectedField={SELECTED_FIELD}
-        onSelectionChange={handleSelectionChange}
+        select={select}
+        onHeaderSelectionChange={onHeaderSelectionChange}
+        onSelectionChange={onSelectionChange}
       >
         {rowSelectable && (
-          <GridColumn
-            field={SELECTED_FIELD}
-            width="42px"
-            headerSelectionValue={
-              data.findIndex((item) => !selectedState[idGetter(item)]) === -1
-            }
-            headerClassName="text-start"
-            className="text-start"
-            locked
-            editable={false}
-          />
+          <GridColumn filterable={false} columnType="checkbox" />
         )}
         {columns.map((col, ind) => (
           <GridColumn
@@ -146,54 +135,56 @@ const KendoGrid = ({
                 ? "text-center k-active-filter"
                 : "text-center"
             }
-            footerCell={(fCell) => {
-              if (
-                typeof col.footerVal === "string" &&
-                col.footerVal.toLowerCase().includes("total")
-              ) {
-                return (
-                  <td
-                    aria-colindex={fCell.ariaColumnIndex}
-                    className="text-left"
-                  >
-                    {col.footerVal +
-                      ` (${intl.formatNumber(
-                        filterBy(
-                          data,
-                          dataState.filter as
-                            | CompositeFilterDescriptor
-                            | FilterDescriptor
-                        )?.length,
-                        "n0"
-                      )})`}
-                  </td>
-                );
-              } else if (col.footerAggr && col.footerAggr.length > 0) {
-                const field = fCell.field as string;
-                const aggrVal = getAggrFooterVal(
-                  data,
-                  dataState,
-                  field,
-                  col.footerAggr
-                );
+            editable={false}
+            cells={{
+              footerCell: (fCell) => {
+                if (
+                  typeof col.footerVal === "string" &&
+                  col.footerVal.toLowerCase().includes("total")
+                ) {
+                  return (
+                    <td
+                      aria-colindex={fCell.ariaColumnIndex}
+                      className="text-left"
+                    >
+                      {col.footerVal +
+                        ` (${intl.formatNumber(
+                          filterBy(
+                            data,
+                            dataState.filter as
+                              | CompositeFilterDescriptor
+                              | FilterDescriptor
+                          )?.length,
+                          "n0"
+                        )})`}
+                    </td>
+                  );
+                } else if (col.footerAggr && col.footerAggr.length > 0) {
+                  const field = fCell.field as string;
+                  const aggrVal = getAggrFooterVal(
+                    data,
+                    dataState,
+                    field,
+                    col.footerAggr
+                  );
 
+                  return (
+                    <td
+                      aria-colindex={fCell.ariaColumnIndex}
+                      className="text-right"
+                    >
+                      {intl.formatNumber(aggrVal, col.format || "")}
+                    </td>
+                  );
+                }
                 return (
                   <td
                     aria-colindex={fCell.ariaColumnIndex}
                     className="text-right"
-                  >
-                    {intl.formatNumber(aggrVal, col.format || "")}
-                  </td>
+                  ></td>
                 );
-              }
-              return (
-                <td
-                  aria-colindex={fCell.ariaColumnIndex}
-                  className="text-right"
-                ></td>
-              );
+              },
             }}
-            editable={false}
           />
         ))}
       </Grid>

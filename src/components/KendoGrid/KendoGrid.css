@@ -30,17 +30,22 @@ th.k-filterable.k-table-th.k-header {
   padding: 0.25rem;
 }
 
-.k-grid tr > td input,
+/* .k-grid tr > td input,
 .k-grid tr > td input:focus {
   padding: 0.25rem;
-  border: 2px solid #ccc;
+  border: 2px solid var(--screen-primary-color-rgba-03);
   box-shadow: none;
   font-size: 0.75rem;
-}
+} */
 
 .k-grid tr > td.k-table-td:nth-of-type(1),
 .k-grid .k-grid-header th.k-table-th.k-header:nth-of-type(1) {
   padding-left: 0;
+}
+
+.k-grid tr > td.k-table-td:nth-of-type(1):has(.k-checkbox),
+.k-grid .k-grid-header th.k-table-th.k-header:nth-of-type(1):has(.k-checkbox) {
+  padding-inline: 0.75rem;
 }
 
 .k-grid tr > td:nth-of-type(2n),
@@ -99,8 +104,9 @@ th.k-filterable.k-table-th.k-header {
   background-color: var(--screen-primary-color-rgba-01);
 }
 
-.k-grid input.k-checkbox:checked {
+.k-grid input.k-checkbox:is(:checked, :checked:focus) {
   background-color: var(--screen-primary-color);
+  box-shadow: 0 0 0 2px var(--screen-primary-color-rgba-01);
 }
 
 .no-records-grid.k-grid .k-grid-table-wrap {

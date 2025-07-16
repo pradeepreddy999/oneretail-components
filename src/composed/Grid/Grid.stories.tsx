@@ -32,6 +32,7 @@ export const Default = {
     data: gridData as [],
     columns: columns,
     sort: [{ field: "id", dir: "asc" }],
+    isGridRowSelectable: true,
   },
   render: (args: GridProps) => {
     return (
