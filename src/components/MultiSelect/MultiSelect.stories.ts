@@ -18,6 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    multiSelectBy: "view By",
     data: columns.map((x) => x.field),
     selected: [],
     isFilterable: true,
