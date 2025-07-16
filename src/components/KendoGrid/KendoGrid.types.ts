@@ -18,10 +18,18 @@ export type KendoGridColumnProps = {
   field: string;
   title: string;
   width: string;
-  textClassName?: string;
+  textClassName?:
+    | "text-center"
+    | "text-start"
+    | "text-end"
+    | "text-left"
+    | "text-right";
   hasColumnMenu?: boolean;
   format?: string;
   locked?: boolean;
+  hasFooter?: boolean;
   footerVal?: string;
   footerAggr?: string;
+  excelCellTextAlign?: "left" | "right" | "center";
+  excelFormat?: string;
 };

@@ -63,7 +63,6 @@ const KendoGrid = ({
 
   const onSelectionChange = React.useCallback(
     (event: GridSelectionChangeEvent) => {
-      console.log(event.select);
       setSelect(event.select);
     },
     []
@@ -110,7 +109,7 @@ const KendoGrid = ({
         onSelectionChange={onSelectionChange}
       >
         {rowSelectable && (
-          <GridColumn filterable={false} columnType="checkbox" />
+          <GridColumn filterable={false} columnType="checkbox" locked />
         )}
         {columns.map((col, ind) => (
           <GridColumn
@@ -136,55 +135,59 @@ const KendoGrid = ({
                 : "text-center"
             }
             editable={false}
-            cells={{
-              footerCell: (fCell) => {
-                if (
-                  typeof col.footerVal === "string" &&
-                  col.footerVal.toLowerCase().includes("total")
-                ) {
-                  return (
-                    <td
-                      aria-colindex={fCell.ariaColumnIndex}
-                      className="text-left"
-                    >
-                      {col.footerVal +
-                        ` (${intl.formatNumber(
-                          filterBy(
-                            data,
-                            dataState.filter as
-                              | CompositeFilterDescriptor
-                              | FilterDescriptor
-                          )?.length,
-                          "n0"
-                        )})`}
-                    </td>
-                  );
-                } else if (col.footerAggr && col.footerAggr.length > 0) {
-                  const field = fCell.field as string;
-                  const aggrVal = getAggrFooterVal(
-                    data,
-                    dataState,
-                    field,
-                    col.footerAggr
-                  );
+            cells={
+              col.hasFooter
+                ? {
+                    footerCell: (fCell) => {
+                      if (
+                        typeof col.footerVal === "string" &&
+                        col.footerVal.toLowerCase().includes("total")
+                      ) {
+                        return (
+                          <td
+                            aria-colindex={fCell.ariaColumnIndex}
+                            className="text-left"
+                          >
+                            {col.footerVal +
+                              ` (${intl.formatNumber(
+                                filterBy(
+                                  data,
+                                  dataState.filter as
+                                    | CompositeFilterDescriptor
+                                    | FilterDescriptor
+                                )?.length,
+                                "n0"
+                              )})`}
+                          </td>
+                        );
+                      } else if (col.footerAggr && col.footerAggr.length > 0) {
+                        const field = fCell.field as string;
+                        const aggrVal = getAggrFooterVal(
+                          data,
+                          dataState,
+                          field,
+                          col.footerAggr
+                        );
 
-                  return (
-                    <td
-                      aria-colindex={fCell.ariaColumnIndex}
-                      className="text-right"
-                    >
-                      {intl.formatNumber(aggrVal, col.format || "")}
-                    </td>
-                  );
-                }
-                return (
-                  <td
-                    aria-colindex={fCell.ariaColumnIndex}
-                    className="text-right"
-                  ></td>
-                );
-              },
-            }}
+                        return (
+                          <td
+                            aria-colindex={fCell.ariaColumnIndex}
+                            className="text-right"
+                          >
+                            {intl.formatNumber(aggrVal, col.format || "")}
+                          </td>
+                        );
+                      }
+                      return (
+                        <td
+                          aria-colindex={fCell.ariaColumnIndex}
+                          className="text-right"
+                        ></td>
+                      );
+                    },
+                  }
+                : undefined
+            }
           />
         ))}
       </Grid>

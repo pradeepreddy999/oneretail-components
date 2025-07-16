@@ -44,11 +44,9 @@ const ExcelExport = ({
             key={(col.field as string).split(" ").join("") + ind}
             field={col.field as string | undefined}
             title={col.title as string | undefined}
-            headerCellOptions={
-              {
-                textAlign: col.excelHeaderTextAlign,
-              } as CellOptions
-            }
+            headerCellOptions={{
+              textAlign: "center",
+            }}
             cellOptions={
               {
                 textAlign: col.excelCellTextAlign,
@@ -59,7 +57,7 @@ const ExcelExport = ({
               col.hasFooter
                 ? ({
                     textAlign: col.excelCellTextAlign,
-                    format: col.excelFooterFormat,
+                    format: col.excelFormat,
                   } as CellOptions)
                 : undefined
             }
@@ -67,15 +65,14 @@ const ExcelExport = ({
               col.hasFooter
                 ? () => {
                     const field = col.field;
-                    const aggrVal =
-                      (col.footerAggr as string).length === 0
-                        ? ""
-                        : getAggrFooterVal(
-                            data,
-                            dataState,
-                            field as string,
-                            col.footerAggr as string
-                          );
+                    const aggrVal = !(col.footerAggr as string)
+                      ? ""
+                      : getAggrFooterVal(
+                          data,
+                          dataState,
+                          field as string,
+                          col.footerAggr as string
+                        );
                     if (
                       typeof col.footerVal === "string" &&
                       col.footerVal.toLowerCase().includes("total")
