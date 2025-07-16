@@ -19,7 +19,7 @@ export type KendoGridColumnProps = {
   title: string;
   width: string;
   textClassName?: string;
-  columnMenuRequired?: boolean;
+  hasColumnMenu?: boolean;
   format?: string;
   locked?: boolean;
   footerVal?: string;

@@ -46,12 +46,32 @@ const generateEmployeeData = (count: number) => {
 export const gridData = generateEmployeeData(20);
 
 export const columns: KendoGridColumnProps[] = [
-  { field: "id", title: "DB ID", width: "80px" },
-  { field: "employeeId", title: "Employee ID", width: "120px" },
-  { field: "firstName", title: "First Name", width: "150px" },
-  { field: "lastName", title: "Last Name", width: "150px" },
-  { field: "position", title: "Position", width: "130px" },
-  { field: "department", title: "Department", width: "150px" },
+  { field: "id", title: "DB ID", width: "80px", hasColumnMenu: true },
+  {
+    field: "employeeId",
+    title: "Employee ID",
+    width: "120px",
+    hasColumnMenu: true,
+  },
+  {
+    field: "firstName",
+    title: "First Name",
+    width: "150px",
+    hasColumnMenu: true,
+  },
+  {
+    field: "lastName",
+    title: "Last Name",
+    width: "150px",
+    hasColumnMenu: true,
+  },
+  { field: "position", title: "Position", width: "130px", hasColumnMenu: true },
+  {
+    field: "department",
+    title: "Department",
+    width: "150px",
+    hasColumnMenu: true,
+  },
   {
     field: "salary",
     title: "Salary",
@@ -65,17 +85,19 @@ export const columns: KendoGridColumnProps[] = [
   // },
   { field: "email", title: "Email", width: "180px" },
   { field: "phone", title: "Phone", width: "200px" },
-  { field: "location", title: "Location", width: "130px" },
-  { field: "manager", title: "Manager", width: "100px" },
+  { field: "location", title: "Location", width: "130px", hasColumnMenu: true },
+  { field: "manager", title: "Manager", width: "100px", hasColumnMenu: true },
   {
     field: "isActive",
     title: "Active",
     width: "80px",
+    hasColumnMenu: true,
   },
   {
     field: "performanceRating",
     title: "Perf. Rating",
     format: "n1",
     width: "80px",
+    hasColumnMenu: false,
   },
 ];
