@@ -11,3 +11,40 @@
   --screen-secondary-color-rgba-05: rgba(31, 23, 85, 0.5);
   --screen-secondary-color-rgba-08: rgba(31, 23, 85, 0.8);
 }
+
+* {
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* scroll bar animation */
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  /* background-color: var(--white-color); */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #bebfc2;
+  background-clip: padding-box;
+  border-radius: 100vw;
+  border: 2px solid transparent;
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border: 0;
+}

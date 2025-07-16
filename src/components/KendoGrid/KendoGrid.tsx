@@ -74,7 +74,7 @@ const KendoGrid = ({
   return data.length > 0 ? (
     <>
       <Grid
-        className="border-none"
+        // className="h-[24rem]"
         style={{ height: "24rem" }}
         data={orderBy(
           filterBy(
@@ -83,12 +83,6 @@ const KendoGrid = ({
           ),
           dataState.sort as SortDescriptor[]
         ).slice(skip, skip + pageSize)}
-        selectable={{
-          enabled: true,
-          drag: false,
-          cell: false,
-          mode: "multiple",
-        }}
         sortable={{
           allowUnsort: true,
           mode: "multiple",
@@ -107,6 +101,12 @@ const KendoGrid = ({
         {...dataState}
         onDataStateChange={handleDataStateChange}
         dataItemKey={DATA_ITEM_KEY}
+        selectable={{
+          enabled: true,
+          drag: false,
+          cell: false,
+          mode: "multiple",
+        }}
         selectedField={SELECTED_FIELD}
         onSelectionChange={handleSelectionChange}
       >
@@ -131,7 +131,7 @@ const KendoGrid = ({
             width={col.width}
             className={col.textClassName}
             columnMenu={
-              col.columnMenuRequired
+              col.hasColumnMenu
                 ? (p) => ColumnMenuCheckboxFilter(p, data, dataState)
                 : undefined
             }
@@ -207,7 +207,7 @@ const KendoGrid = ({
       />
     </>
   ) : (
-    <Grid data={[]}>
+    <Grid data={[]} className="no-records-grid">
       <GridNoRecords>No Records found</GridNoRecords>
     </Grid>
   );

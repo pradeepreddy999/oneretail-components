@@ -1,4 +1,8 @@
-.k-grid tr > :is(td, th) {
+.k-grid {
+  border: none;
+}
+
+.k-grid tr > :is(td.k-table-td, th.k-table-th) {
   border-inline: none;
 }
 
@@ -8,7 +12,7 @@ th.k-filterable.k-table-th.k-header {
   padding-inline: 0.5rem;
 }
 
-.k-grid tr > th {
+.k-grid tr > th.k-table-th {
   border-bottom: 1px solid var(--table-cell-border-color);
 }
 
@@ -17,7 +21,7 @@ th.k-filterable.k-table-th.k-header {
   font-weight: bold;
 }
 
-.k-grid tr > td:nth-of-type(n + 1) {
+.k-grid tr > td.k-table-td:nth-of-type(n + 1) {
   padding: 0.75rem;
   border-bottom: 1px dotted var(--table-cell-border-color);
 }
@@ -34,8 +38,8 @@ th.k-filterable.k-table-th.k-header {
   font-size: 0.75rem;
 }
 
-.k-grid tr > td:nth-of-type(1),
-.k-grid .k-grid-header th.k-header:nth-of-type(1) {
+.k-grid tr > td.k-table-td:nth-of-type(1),
+.k-grid .k-grid-header th.k-table-th.k-header:nth-of-type(1) {
   padding-left: 0;
 }
 
@@ -101,6 +105,7 @@ th.k-filterable.k-table-th.k-header {
 
 .no-records-grid.k-grid .k-grid-table-wrap {
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,4 +137,35 @@ th.k-filterable.k-table-th.k-header {
 
 .k-grid-header .k-sort-icon {
   color: var(--screen-primary-color);
+}
+
+/* setting height for the column menu check box filter popup */
+
+.k-filter-menu-container {
+  height: 15rem;
+  color: var(--text-color);
+}
+
+.k-filter-menu-container .k-reset.k-multicheck-wrap {
+  height: 55%;
+}
+
+.k-filter-menu-container .k-checkbox:checked {
+  background-color: var(--screen-primary-color);
+  border-color: var(--screen-primary-color);
+  box-shadow: 0 0 0 2px var(--screen-primary-color-rgba-01);
+}
+
+.k-filter-menu-container .k-actions .k-button {
+  color: var(--color-white);
+}
+
+.k-filter-menu-container .k-actions .k-button[type="submit"] {
+  background-color: var(--screen-secondary-color);
+  border-color: var(--screen-secondary-color);
+}
+
+.k-filter-menu-container .k-actions .k-button[type="reset"] {
+  background-color: var(--screen-primary-color);
+  border-color: var(--screen-primary-color);
 }

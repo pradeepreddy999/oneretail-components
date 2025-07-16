@@ -1,7 +1,8 @@
 import type { SortDescriptor } from "@progress/kendo-data-query";
+import type { KendoGridProps } from "../../components";
 
 export type GridProps = {
-  viewBy: string;
+  viewBy: string[];
   viewByOptions: string[];
   metrics: string[];
   metricOptions: string[];
@@ -11,4 +12,4 @@ export type GridProps = {
   sortOptions?: string[];
   sort: SortDescriptor[];
   isGridRowSelectable?: boolean;
-};
+} & Omit<KendoGridProps, "excelRef" | "handleExportComplete">;
