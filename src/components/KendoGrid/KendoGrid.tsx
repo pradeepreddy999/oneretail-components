@@ -31,10 +31,10 @@ const KendoGrid = ({
   rowsSelected,
   onHeaderSelectionChange,
   onSelectionChange,
+  rowSelectable,
   excelRef,
   handleExportComplete,
   pageSize = 30,
-  rowSelectable,
 }: KendoGridProps) => {
   const DATA_ITEM_KEY = "id";
   const intl = useInternationalization();
@@ -99,12 +99,14 @@ const KendoGrid = ({
         onDataStateChange={handleDataStateChange}
         onPageChange={(e) => setSkip(e.page.skip)}
         dataItemKey={DATA_ITEM_KEY}
-        selectable={{
-          enabled: true,
-          drag: false,
-          cell: false,
-          mode: "multiple",
-        }}
+        selectable={
+          rowSelectable && {
+            enabled: true,
+            drag: false,
+            cell: false,
+            mode: "multiple",
+          }
+        }
         select={rowsSelected}
         onHeaderSelectionChange={onHeaderSelectionChange}
         onSelectionChange={onSelectionChange}

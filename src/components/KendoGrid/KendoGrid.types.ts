@@ -13,13 +13,13 @@ export type KendoGridProps = {
   data: [];
   columns: KendoGridColumnProps[];
   sort: [{ field: string; dir: "asc" | "desc" }] | SortDescriptor[];
-  rowsSelected: SelectDescriptor;
-  onHeaderSelectionChange: (event: GridHeaderSelectionChangeEvent) => void;
-  onSelectionChange: (event: GridSelectionChangeEvent) => void;
+  rowsSelected?: SelectDescriptor;
+  onHeaderSelectionChange?: (event: GridHeaderSelectionChangeEvent) => void;
+  onSelectionChange?: (event: GridSelectionChangeEvent) => void;
+  rowSelectable?: boolean;
   excelRef: Ref<ExcelExport> | undefined;
   handleExportComplete: ExportCompleteProps;
   pageSize?: number;
-  rowSelectable?: boolean;
 };
 
 export type KendoGridColumnProps = {

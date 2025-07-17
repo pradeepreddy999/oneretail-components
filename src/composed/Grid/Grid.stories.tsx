@@ -22,7 +22,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const WithRowSelection = {
   args: {
     viewBy: [] as string[],
     viewByOptions: [] as string[],
@@ -36,5 +36,18 @@ export const Default = {
     onHeaderSelectionChange: fn(),
     onSelectionChange: fn(),
     isGridRowSelectable: true,
+  },
+} satisfies Story;
+
+export const WithoutRowSelection = {
+  args: {
+    viewBy: [] as string[],
+    viewByOptions: [] as string[],
+    metrics: [] as string[],
+    metricOptions: [] as string[],
+    title: "Products",
+    data: gridData as [],
+    columns: columns,
+    sort: [{ field: "id", dir: "asc" }],
   },
 } satisfies Story;
