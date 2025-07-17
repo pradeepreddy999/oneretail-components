@@ -31,8 +31,12 @@ export const Default = {
     data: gridData as [],
     columns: columns,
     handleExportComplete: fn(),
+    rowsSelected: {},
+    onHeaderSelectionChange: fn(),
+    onSelectionChange: fn(),
     sort: [{ field: "id", dir: "asc" }],
     excelRef: null,
+    rowSelectable: true,
   },
   render: (args: KendoGridProps) => {
     const ref = useRef<ExcelExport>(null);

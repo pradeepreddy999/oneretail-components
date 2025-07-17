@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 import Grid from "./Grid";
 import { columns, gridData } from "../../utils/data";
 
@@ -31,6 +32,9 @@ export const Default = {
     data: gridData as [],
     columns: columns,
     sort: [{ field: "id", dir: "asc" }],
+    rowsSelected: {},
+    onHeaderSelectionChange: fn(),
+    onSelectionChange: fn(),
     isGridRowSelectable: true,
   },
 } satisfies Story;
