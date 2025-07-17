@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import Grid from "./Grid";
-import type { GridProps } from "./Grid.types";
 import { columns, gridData } from "../../utils/data";
 
 const meta = {
@@ -33,12 +32,5 @@ export const Default = {
     columns: columns,
     sort: [{ field: "id", dir: "asc" }],
     isGridRowSelectable: true,
-  },
-  render: (args: GridProps) => {
-    return (
-      <div className="p-8 h-[24rem]">
-        <Grid {...args} />
-      </div>
-    );
   },
 } satisfies Story;

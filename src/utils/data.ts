@@ -46,7 +46,14 @@ const generateEmployeeData = (count: number) => {
 export const gridData = generateEmployeeData(20);
 
 export const columns: KendoGridColumnProps[] = [
-  { field: "id", title: "DB ID", width: "80px", hasColumnMenu: true },
+  {
+    field: "id",
+    title: "DB ID",
+    width: "120px",
+    hasColumnMenu: true,
+    hasFooter: true,
+    footerVal: "Grand Total",
+  },
   {
     field: "employeeId",
     title: "Employee ID",
@@ -77,6 +84,10 @@ export const columns: KendoGridColumnProps[] = [
     title: "Salary",
     width: "150px",
     format: "c0",
+    hasFooter: true,
+    footerAggr: "sum",
+    excelCellTextAlign: "right",
+    excelFormat: "$#,##0_);[Red]($#,##0)",
   },
   // {
   //   field: "hireDate",

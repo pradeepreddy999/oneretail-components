@@ -83,6 +83,10 @@ th.k-filterable.k-table-th.k-header {
   background-color: var(--screen-primary-color-rgba-03) !important;
 }
 
+.k-grid .k-table-row.k-selected > td::before {
+  background-color: transparent !important;
+}
+
 .k-grid .k-grid-footer tr > td {
   height: 0.6em;
   line-height: 0.68;
