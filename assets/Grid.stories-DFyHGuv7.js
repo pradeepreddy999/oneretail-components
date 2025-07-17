@@ -1,0 +1,20 @@
+import{j as e}from"./index-C3kvHGQG.js";import{r as n}from"./iframe-ukNpExNE.js";import{K as h}from"./KendoGrid-DeIBwWpx.js";import"./MultiSelect-DMLbupZZ.js";import{c as x,g as v}from"./data--x_PIM-s.js";import"./index-ChYTZ8S0.js";function j({title:r,titleId:s,...o},i){return n.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 16 16",fill:"currentColor","aria-hidden":"true","data-slot":"icon",ref:i,"aria-labelledby":s},o),r?n.createElement("title",{id:s},r):null,n.createElement("path",{d:"M8.75 2.75a.75.75 0 0 0-1.5 0v5.69L5.03 6.22a.75.75 0 0 0-1.06 1.06l3.5 3.5a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 0 0-1.06-1.06L8.75 8.44V2.75Z"}),n.createElement("path",{d:"M3.5 9.75a.75.75 0 0 0-1.5 0v1.5A2.75 2.75 0 0 0 4.75 14h6.5A2.75 2.75 0 0 0 14 11.25v-1.5a.75.75 0 0 0-1.5 0v1.5c0 .69-.56 1.25-1.25 1.25h-6.5c-.69 0-1.25-.56-1.25-1.25v-1.5Z"}))}const S=n.forwardRef(j),b=r=>{if(r.current===null)throw Error("Error downloading...");const s=r.current.workbookOptions(),o=s.sheets[0],i=o.rows;for(let t=0;t<i.length;t++){const c=i[t],l=c.cells;for(let a=0;a<l.length;a++){const d=l[a];c.type==="footer"&&(d.background="#7a7a7a",d.color="#fff")}}o.columns.forEach(t=>{delete t.width,t.autoWidth=!0}),r.current.save(s)},w=({viewBy:r,viewByOptions:s,metrics:o,metricOptions:i,title:p,data:t,columns:c,sort:l,isGridRowSelectable:a})=>{const[d,u]=n.useState(!1),f=n.useRef(null),y=()=>{u(!0),b(f)};return e.jsxs("div",{className:"p-4 bg-white rounded shadow-lg",children:[e.jsxs("div",{className:"flex justify-between items-center mb-2",children:[e.jsxs("div",{className:"flex flex-wrap",children:[e.jsx("div",{children:r.join(", ")+s.join(", ")}),e.jsx("div",{children:o.join(", ")+i.join(", ")})]}),e.jsx("div",{className:"float-end",children:e.jsx("button",{className:`h-6 w-15 bg-[var(--screen-primary-color)] 
+            rounded text-white flex items-center justify-center cursor-pointer`,onClick:y,children:d?e.jsx(S,{className:"h-5 w-7"}):"Export"})})]}),e.jsx("div",{className:"border-1 px-4 border-gray-300 rounded-lg",children:e.jsx(h,{title:p,data:t,columns:c,handleExportComplete:()=>u(!1),sort:l,excelRef:f,rowSelectable:a})})]})};w.__docgenInfo={description:"",methods:[],displayName:"Grid",props:{viewBy:{required:!0,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:""},viewByOptions:{required:!0,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:""},metrics:{required:!0,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:""},metricOptions:{required:!0,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:""},groupBy:{required:!1,tsType:{name:"string"},description:""},groupByOptions:{required:!1,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:""},sortBy:{required:!1,tsType:{name:"string"},description:""},sortOptions:{required:!1,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:""},sort:{required:!0,tsType:{name:"Array",elements:[{name:"SortDescriptor"}],raw:"SortDescriptor[]"},description:""},isGridRowSelectable:{required:!1,tsType:{name:"boolean"},description:""}}};const{fn:g}=__STORYBOOK_MODULE_TEST__,_={title:"Stories/Grid",component:w,tags:["autodocs"],parameters:{layout:"fullscreen"}},m={args:{viewBy:[],viewByOptions:[],metrics:[],metricOptions:[],title:"Products",data:v,columns:x,sort:[{field:"id",dir:"asc"}],rowsSelected:{},onHeaderSelectionChange:g(),onSelectionChange:g(),isGridRowSelectable:!0}};m.parameters={...m.parameters,docs:{...m.parameters?.docs,source:{originalSource:`{
+  args: {
+    viewBy: [] as string[],
+    viewByOptions: [] as string[],
+    metrics: [] as string[],
+    metricOptions: [] as string[],
+    title: "Products",
+    data: gridData as [],
+    columns: columns,
+    sort: [{
+      field: "id",
+      dir: "asc"
+    }],
+    rowsSelected: {},
+    onHeaderSelectionChange: fn(),
+    onSelectionChange: fn(),
+    isGridRowSelectable: true
+  }
+} satisfies Story`,...m.parameters?.docs?.source}}};const R=["Default"];export{m as Default,R as __namedExportsOrder,_ as default};
