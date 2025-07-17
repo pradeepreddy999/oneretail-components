@@ -4,6 +4,7 @@ import {
   type FilterDescriptor,
   type State,
 } from "@progress/kendo-data-query";
+import type { ChangeEvent } from "./common.types";
 
 export const isColumnFiltered = (field: string, dataState: State) => {
   if (!dataState.filter || !Array.isArray(dataState.filter.filters))
@@ -161,4 +162,10 @@ export const throttle = <T extends (...args: unknown[]) => void>(
     shouldWait = true;
     setTimeout(timeoutFunc, delay);
   };
+};
+
+export const sampleChangeEvent: ChangeEvent = (...args) => {
+  const [from, value] = args;
+  console.log("From: ", from);
+  console.log("Value: ", value);
 };

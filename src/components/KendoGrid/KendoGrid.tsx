@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   Grid,
   GridColumn,
   GridNoRecords,
   type GridDataStateChangeEvent,
+  type GridHeaderSelectionChangeEvent,
+  type GridSelectionChangeEvent,
 } from "@progress/kendo-react-grid";
 import { useInternationalization } from "@progress/kendo-react-intl";
-import type { KendoGridProps } from "./KendoGrid.types";
 import {
   filterBy,
   orderBy,
@@ -15,6 +16,8 @@ import {
   type SortDescriptor,
   type State,
 } from "@progress/kendo-data-query";
+import type { SelectDescriptor } from "@progress/kendo-react-data-tools";
+import type { KendoGridProps } from "./KendoGrid.types";
 import {
   ColumnMenuCheckboxFilter,
   getAggrFooterVal,
@@ -28,12 +31,10 @@ const KendoGrid = ({
   data,
   columns,
   sort,
-  rowsSelected,
-  onHeaderSelectionChange,
-  onSelectionChange,
-  rowSelectable,
   excelRef,
   handleExportComplete,
+  // handleChangeEvent,
+  rowSelectType,
   pageSize = 30,
 }: KendoGridProps) => {
   const DATA_ITEM_KEY = "id";
@@ -42,7 +43,7 @@ const KendoGrid = ({
     sort: sort,
   });
   const [skip, setSkip] = useState(0);
-  // const [select, setSelect] = useState<SelectDescriptor>({});
+  const [select, setSelect] = useState<SelectDescriptor>({});
 
   const handleDataStateChange = (event: GridDataStateChangeEvent) => {
     if (
@@ -54,19 +55,17 @@ const KendoGrid = ({
     setDataState(event.dataState);
   };
 
-  // const onHeaderSelectionChange = React.useCallback(
-  //   (event: GridHeaderSelectionChangeEvent) => {
-  //     setSelect(event.select);
-  //   },
-  //   []
-  // );
+  const onHeaderSelectionChange = useCallback(
+    (event: GridHeaderSelectionChangeEvent) => {
+      setSelect(event.select);
+      // handleChangeEvent("grid-selection",event.select);
+    },
+    []
+  );
 
-  // const onSelectionChange = React.useCallback(
-  //   (event: GridSelectionChangeEvent) => {
-  //     setSelect(event.select);
-  //   },
-  //   []
-  // );
+  const onSelectionChange = useCallback((event: GridSelectionChangeEvent) => {
+    setSelect(event.select);
+  }, []);
 
   return data.length > 0 ? (
     <>
@@ -100,18 +99,19 @@ const KendoGrid = ({
         onPageChange={(e) => setSkip(e.page.skip)}
         dataItemKey={DATA_ITEM_KEY}
         selectable={
-          rowSelectable && {
+          rowSelectType && {
             enabled: true,
             drag: false,
             cell: false,
-            mode: "multiple",
+            // mode: "multiple",
+            mode: rowSelectType,
           }
         }
-        select={rowsSelected}
+        select={select}
         onHeaderSelectionChange={onHeaderSelectionChange}
         onSelectionChange={onSelectionChange}
       >
-        {rowSelectable && (
+        {rowSelectType && (
           <GridColumn filterable={false} columnType="checkbox" locked />
         )}
         {columns.map((col, ind) => (

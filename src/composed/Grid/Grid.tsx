@@ -18,7 +18,8 @@ const Grid = ({
   data,
   columns,
   sort,
-  isGridRowSelectable,
+  handleChangeEvent,
+  rowSelectType,
 }: GridProps) => {
   const [exportLoader, setExportLoader] = useState(false);
   const excelRef = useRef<ExcelExport>(null);
@@ -65,7 +66,8 @@ const Grid = ({
           handleExportComplete={() => setExportLoader(false)}
           sort={sort}
           excelRef={excelRef}
-          rowSelectable={isGridRowSelectable}
+          rowSelectType={rowSelectType}
+          handleChangeEvent={handleChangeEvent}
         />
       </div>
     </div>

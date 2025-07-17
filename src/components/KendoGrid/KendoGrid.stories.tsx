@@ -5,9 +5,10 @@ import { useRef } from "react";
 import type { ExcelExport } from "@progress/kendo-react-excel-export";
 import type { KendoGridProps } from "./KendoGrid.types";
 import { columns, gridData } from "../../utils/data";
+import { sampleChangeEvent } from "../../utils";
 
 const meta = {
-  title: "Stories/KendoGrid",
+  title: "Components/KendoGrid",
   component: KendoGrid,
   tags: ["autodocs"],
   parameters: {
@@ -25,23 +26,67 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const WithoutRowSelection = {
   args: {
     title: "Products",
     data: gridData as [],
     columns: columns,
     handleExportComplete: fn(),
-    rowsSelected: {},
-    onHeaderSelectionChange: fn(),
-    onSelectionChange: fn(),
+    handleChangeEvent: fn(),
     sort: [{ field: "id", dir: "asc" }],
     excelRef: null,
-    rowSelectable: true,
+  },
+  render: (args: KendoGridProps) => {
+    const ref = useRef<ExcelExport>(null);
+
+    return (
+      <div className="p-8">
+        <KendoGrid
+          {...args}
+          excelRef={ref}
+          handleChangeEvent={sampleChangeEvent}
+        />
+      </div>
+    );
+  },
+} satisfies Story;
+
+export const WithSingleRowSelection = {
+  args: {
+    title: "Products",
+    data: gridData as [],
+    columns: columns,
+    handleExportComplete: fn(),
+    sort: [{ field: "id", dir: "asc" }],
+    excelRef: null,
+    rowSelectType: "single",
+    handleChangeEvent: sampleChangeEvent,
   },
   render: (args: KendoGridProps) => {
     const ref = useRef<ExcelExport>(null);
     return (
-      <div className="p-8 h-[24rem]">
+      <div className="p-8">
+        <KendoGrid {...args} excelRef={ref} />
+      </div>
+    );
+  },
+} satisfies Story;
+
+export const WithMultiRowsSelection = {
+  args: {
+    title: "Products",
+    data: gridData as [],
+    columns: columns,
+    handleExportComplete: fn(),
+    sort: [{ field: "id", dir: "asc" }],
+    excelRef: null,
+    rowSelectType: "multiple",
+    handleChangeEvent: sampleChangeEvent,
+  },
+  render: (args: KendoGridProps) => {
+    const ref = useRef<ExcelExport>(null);
+    return (
+      <div className="p-8">
         <KendoGrid {...args} excelRef={ref} />
       </div>
     );
