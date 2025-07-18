@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
 import Grid from "./Grid";
 import { columns, gridData } from "../../utils/data";
+import { sampleChangeEvent } from "../../utils";
 
 const meta = {
-  title: "Stories/Grid",
+  title: "Components/Grid",
   component: Grid,
   tags: ["autodocs"],
   parameters: {
@@ -32,9 +32,7 @@ export const Default = {
     data: gridData as [],
     columns: columns,
     sort: [{ field: "id", dir: "asc" }],
-    rowsSelected: {},
-    onHeaderSelectionChange: fn(),
-    onSelectionChange: fn(),
-    isGridRowSelectable: true,
+    rowSelectType: "multiple",
+    handleChangeEvent: sampleChangeEvent,
   },
 } satisfies Story;
