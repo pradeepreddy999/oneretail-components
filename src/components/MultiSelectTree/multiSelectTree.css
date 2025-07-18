@@ -1,0 +1,34 @@
+.k-treeview .k-treeview-item {
+  color: #4365d8;
+  font-size: 12px;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.k-treeview .k-treeview-item :has(.checked) {
+  color: #fff;
+  background-color: #4365d8;
+  border-radius: 4px;
+  margin: 1px;
+}
+.k-treeview .k-treeview-item .k-treeview-leaf {
+  width: 100%;
+}
+
+.k-treeview .k-treeview-item .k-checkbox-wrap .k-checkbox:checked,
+.k-checkbox.k-checked {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+}
+.custom-Multiselect
+  .k-animation-container
+  .k-child-animation-container
+  .k-popup {
+  border-radius: 0.5rem;
+  border-width: 1px;
+  padding: 1px;
+}
+.custom-Multiselect {
+  background-color: #9f929233 !important;
+}
